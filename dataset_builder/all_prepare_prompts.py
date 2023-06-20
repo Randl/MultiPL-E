@@ -30,7 +30,8 @@ def doctests(variation):
 def originals(variation, dataset):
     if dataset == "mbpp":
         return "../datasets/mbpp-typed"
-
+    if dataset == "plus":
+        return "../../heplus_process/humaneval"
     match variation:
         case "keep":
             return "../datasets/originals"
@@ -54,6 +55,7 @@ def prepare(lang: str, variation: str, dataset: str):
     
     cmd = f"python3 prepare_prompts_json.py --lang humaneval_to_{lang}.py" + \
          f" --prompt-terminology {p} --doctests {d} --originals {o} --output {output}"
+    print(cmd)
     
     result = subprocess.run(cmd, shell=True, encoding="utf-8")
     if  result.returncode != 0:
@@ -62,5 +64,5 @@ def prepare(lang: str, variation: str, dataset: str):
 if __name__ == "__main__":
     for lang in LANGS:
         for variation in VARIATIONS:
-            for dataset in [ "mbpp", "humaneval" ]:
+            for dataset in [ "plus" ]:
                 prepare(lang, variation, dataset)

@@ -9,7 +9,8 @@ from pathlib import Path
 import argparse
 from base_language_translator import LanguageTranslator
 from typing import List
-
+import sys
+sys.set_int_max_str_digits(10000000)
 
 def translate_expr(translator, py_expr: ast.AST):
     """

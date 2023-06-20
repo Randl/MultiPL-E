@@ -29,6 +29,9 @@ This ignores the tests cases, but it should be compact enough.
 
 import argparse
 import sys
+
+from tqdm import tqdm
+
 from generic_translator import list_originals, translate_prompt_and_tests, get_stop_from_translator
 from pathlib import Path
 import json
@@ -71,7 +74,7 @@ def main():
         sys.exit(1)
 
     results = [ ]
-    for original in list_originals(args.originals).values():
+    for original in tqdm(list_originals(args.originals).values()):
         original_name = original.name.split(".")[0]
         print(f"Processing {original_name}...")
 
